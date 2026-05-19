@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+
+        .add-btn {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .task-card {
+            background: #f8f9fa;
+            margin: 15px 0;
+            padding: 15px;
+            border-left: 6px solid #667eea;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        .task-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .status {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .done {
+            color: green;
+        }
+
+        .pending {
+            color: red;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .edit {
+            background: #007bff;
+        }
+
+        .delete {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 My To-Do List</h1>
+        <a class="add-btn" href="/add/">+ Add Task</a>
+
+        {% for task in tasks %}
+        <div class="task-card">
+            <div class="task-title">{{ task.title }}</div>
+            <p>📅 {{ task.due_date }} | ⏰ {{ task.due_time }}</p>
+
+            {% if task.completed %}
+                <div class="status done">✅ Completed</div>
+            {% else %}
+                <div class="status pending">⏳ Pending</div>
+            {% endif %}
+
+            <br>
+            <a class="btn edit" href="/edit/{{ task.id }}">Edit</a>
+            <a class="btn delete" href="/delete/{{ task.id }}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
